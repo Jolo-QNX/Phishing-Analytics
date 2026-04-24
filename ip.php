@@ -7,12 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
 $__ip_session_id = session_id() ?: 'guest';
 session_write_close();
 
-/**
- * Returns:
- * [
- *   '1.2.3.4' => ['country' => 'Philippines', 'org' => 'PLDT', 'asn' => 'AS9299']
- * ]
- */
 function getIpInfo(array|string $ips, ?string $sessionIdOverride = null): array
 {
     $sessionId = $sessionIdOverride ?: (session_id() ?: 'guest');
@@ -23,8 +17,8 @@ function getIpInfo(array|string $ips, ?string $sessionIdOverride = null): array
     $cacheFile = __DIR__ . '/ip_cache.json';
     $cache = readJsonFileWithLock($cacheFile);
 
-    $successTtl = 86400 * 14; // 14 days
-    $failureTtl = 7200;       // 2 hours
+    $successTtl = 86400 * 14;
+    $failureTtl = 7200;       
 
     foreach ($requested as $rawIp) {
         $ip = extractIpValue((string)$rawIp);
