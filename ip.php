@@ -674,7 +674,7 @@ function safeRandomHex(int $bytes): string
 
 if ((php_sapi_name() === 'cli' || !isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] === 'GET')
     && basename((string)($_SERVER['SCRIPT_NAME'] ?? '')) === basename(__FILE__)) {
-    $target = $_GET['ip'] ?? '49.144.69.66';
+    $target = $_GET['ip'] ?? '';
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(
         getIpInfo($target, $__ip_session_id),
